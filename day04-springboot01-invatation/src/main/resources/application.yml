@@ -1,0 +1,62 @@
+
+#修改端口号
+server:
+  port: 8080
+#数据库连接
+spring:
+  thymeleaf:
+    #自定义模板引擎的路径设置
+    #prefix: classpath:/page/
+    #关闭thymeleaf的缓存
+    cache: false
+  devtools:
+    # 热加载延迟数
+    restart:
+      poll-interval: 2000ms
+      quiet-period: 1999ms
+      #数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/person_info?characterEncoding=utf-8&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    #配置参数
+    druid:
+      #初始化连接数
+      initial-size: 1
+      #最小空闲连接
+      min-idle: 1
+      #最大活动连接
+      max-active: 20
+      #获取连接时测试是否可用
+      test-on-borrow: true
+      #监控页面启动
+      filter:
+        wall:
+          config:
+            start-transaction-allow: true
+  #修改资源路径
+  web:
+    resources:
+      static-locations: classpath:/statics/
+
+
+mybatis:
+  #包扫描别名
+  type-aliases-package: com.xunfang.springboot01.entity
+  #日志打印
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # mapper 静态路径更改扫描
+  mapper-locations: classpath:mapper/*.xml
+
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      id-type: auto
+#配置pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
